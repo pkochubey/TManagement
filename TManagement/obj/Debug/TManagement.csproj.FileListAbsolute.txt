@@ -1,0 +1,54 @@
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\bin\Debug\TManagement.exe.config
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\bin\Debug\TManagement.exe
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\bin\Debug\TManagement.pdb
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\MainWindow.baml
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\ProjectName.baml
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\MainWindow.g.cs
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\ProjectName.g.cs
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\App.g.cs
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement_MarkupCompile.cache
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement.g.resources
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement.Properties.Resources.resources
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement.csproj.GenerateResource.Cache
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement.exe
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement.pdb
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\TManagement.csprojResolveAssemblyReference.cache
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\AboutProject.baml
+C:\Users\Kochubei\documents\visual studio 2013\Projects\TManagement\TManagement\obj\Debug\AboutProject.g.cs
+C:\Users\МИС\Desktop\TManagement\TManagement\bin\Debug\TManagement.exe.config
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement.exe
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement.pdb
+C:\Users\МИС\Desktop\TManagement\TManagement\bin\Debug\TManagement.exe
+C:\Users\МИС\Desktop\TManagement\TManagement\bin\Debug\TManagement.pdb
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\AboutProject.baml
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\MainWindow.baml
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\ProjectName.baml
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\AboutProject.g.cs
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\MainWindow.g.cs
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\ProjectName.g.cs
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\App.g.cs
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement_MarkupCompile.cache
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement.g.resources
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement.Properties.Resources.resources
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement.csproj.GenerateResource.Cache
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\МИС\Desktop\TManagement\TManagement\obj\Debug\TManagement_MarkupCompile.lref
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\bin\Debug\TManagement.exe.config
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.exe
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.pdb
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\bin\Debug\TManagement.exe
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\bin\Debug\TManagement.pdb
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.csprojResolveAssemblyReference.cache
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\MainWindow.baml
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\ProjectName.baml
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\AboutProject.g.cs
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\MainWindow.g.cs
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\ProjectName.g.cs
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\App.g.cs
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement_MarkupCompile.cache
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement_MarkupCompile.lref
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\AboutProject.baml
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.g.resources
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.Properties.Resources.resources
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.csproj.GenerateResource.Cache
