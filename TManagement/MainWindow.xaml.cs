@@ -95,6 +95,8 @@ namespace TManagement
 
                 StartButton.Content = "Стоп";
                 StartButton.Background = (Brush)bc.ConvertFrom("#FFF97171");
+
+                ProjectListBox.IsEnabled = false;
             } 
             else
             {
@@ -112,6 +114,8 @@ namespace TManagement
                 _timeManagement.Projects[_indexSelectProject].TimeIntervals.Add(ti);
 
                 RebuildTimeInfo();
+
+                ProjectListBox.IsEnabled = true;
             }
         }
         void CalculateTime(Label label)

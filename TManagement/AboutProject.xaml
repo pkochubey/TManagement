@@ -2,15 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="clr-namespace:TManagement.Converters"
-        Title="Время по проекту" Height="300" Width="338" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
+        Title="Время по проекту" Height="300" Width="338" ShowInTaskbar="False"  Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
     <Window.Resources>
         <converters:GroupHoursConverter x:Key="converterAllTime" />
         <Style x:Key="headerStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
     </Window.Resources>
-    <Grid>
-        <ListView Name="ListViewTime" Margin="5,5,5,50">
+    <DockPanel>
+        <Button Margin="5" DockPanel.Dock="Bottom" Content="Закрыть" HorizontalAlignment="Right" VerticalAlignment="Top" Width="84" Height="36" Click="ButtonBase_OnClick"/>
+        <ListView Margin="5" Name="ListViewTime">
             <ListView.View>
                 <GridView AllowsColumnReorder="False" ColumnHeaderContainerStyle="{StaticResource headerStyle}">
                     <GridViewColumn DisplayMemberBinding="{Binding Day}"/>
@@ -43,6 +44,5 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Content="Закрыть" HorizontalAlignment="Left" Margin="238,234,0,0" VerticalAlignment="Top" Width="84" Height="36" Click="ButtonBase_OnClick"/>
-    </Grid>
+    </DockPanel>
 </Window>
