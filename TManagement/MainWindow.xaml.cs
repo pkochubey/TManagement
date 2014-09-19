@@ -97,6 +97,7 @@ namespace TManagement
                 StartButton.Background = (Brush)bc.ConvertFrom("#FFF97171");
 
                 ProjectListBox.IsEnabled = false;
+                TaskbarItemInfo.Overlay = (ImageSource)Resources["OverlayImage"];
             } 
             else
             {
@@ -116,6 +117,7 @@ namespace TManagement
                 RebuildTimeInfo();
 
                 ProjectListBox.IsEnabled = true;
+                TaskbarItemInfo.Overlay = null;
             }
         }
         void CalculateTime(Label label)

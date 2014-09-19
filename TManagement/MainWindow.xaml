@@ -4,6 +4,25 @@
         Title="Time Management" Height="344" Width="536" 
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         Closing="Window_Closing" Icon="Images/icon.ico">
+    <Window.Resources>
+        <DrawingImage x:Key="OverlayImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Brush="Tomato">
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0 0 16 16" RadiusX="10" RadiusY="10"/>
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+
+        </DrawingImage>
+    </Window.Resources>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo  />
+    </Window.TaskbarItemInfo>
     <DockPanel>
         <ListBox DockPanel.Dock="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="ProjectListBox" HorizontalAlignment="Left" Height="309" Margin="5,5,5,5" VerticalAlignment="Top" Width="165" SelectionChanged="ProjectListBox_Selected" MouseDoubleClick="ProjectListBox_MouseDoubleClick" FontSize="12">
             <ListBox.ContextMenu>
