@@ -18,7 +18,7 @@ namespace TManagement
 
             var items = new List<Week>();
 
-            foreach (var ti in timeIntervals)
+            foreach (TimeInterval ti in timeIntervals)
             {
                 DateTime startDateTime = DateTime.Parse(ti.StartDate);
                 DateTime endDateTime = DateTime.Parse(ti.EndDate);
@@ -27,9 +27,9 @@ namespace TManagement
                 long elapsedTicks = endDateTime.Ticks - startDateTime.Ticks;
                 var elapsedSpan = new TimeSpan(elapsedTicks);
 
-                var hours = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м. " + elapsedSpan.Seconds + " c. ";
+                string hours = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м. " + elapsedSpan.Seconds + " c. ";
 
-                items.Add(new Week()
+                items.Add(new Week
                 {
                     Number = numberWeek,
                     Hours = hours,
@@ -41,18 +41,20 @@ namespace TManagement
             ListViewTime.ItemsSource = items;
             ListViewTime.Items.SortDescriptions.Add(new SortDescription("Number", ListSortDirection.Descending));
 
-            var view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewTime.ItemsSource);
+            var view = (CollectionView) CollectionViewSource.GetDefaultView(ListViewTime.ItemsSource);
 
             if (view.GroupDescriptions != null)
             {
                 view.GroupDescriptions.Add(new PropertyGroupDescription("Number"));
             }
         }
+
         private static int GetWeekNumber(DateTime dtPassed)
         {
-            var ciCurr = CultureInfo.CurrentCulture;
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
             return ciCurr.Calendar.GetWeekOfYear(dtPassed, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Close();

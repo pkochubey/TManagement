@@ -8,7 +8,7 @@ namespace TManagement
         {
             InitializeComponent();
 
-            Owner = App.Current.MainWindow;
+            Owner = Application.Current.MainWindow;
 
             ProjectNameTextBox.Text = projectName;
         }

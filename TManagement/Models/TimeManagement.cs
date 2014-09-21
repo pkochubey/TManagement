@@ -8,19 +8,16 @@ namespace TManagement.Models
     public class TimeManagement
     {
         [XmlElement("Project")]
-        public List<Project> Projects
-        { get; set; }
+        public List<Project> Projects { get; set; }
     }
 
     public class Project
     {
         [XmlAttribute("name")]
-        public string Name
-        { get; set; }
+        public string Name { get; set; }
 
         [XmlElement("TimeInterval")]
-        public List<TimeInterval> TimeIntervals
-        { get; set; }
+        public List<TimeInterval> TimeIntervals { get; set; }
 
         public override string ToString()
         {
@@ -31,11 +28,9 @@ namespace TManagement.Models
     public class TimeInterval
     {
         [XmlAttribute("start")]
-        public string StartDate
-        { get; set; }
+        public string StartDate { get; set; }
 
         [XmlAttribute("end")]
-        public string EndDate
-        { get; set; }
+        public string EndDate { get; set; }
     }
 }

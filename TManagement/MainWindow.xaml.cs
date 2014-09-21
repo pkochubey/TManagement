@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,16 +17,19 @@ using TManagement.Models;
 
 namespace TManagement
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public delegate void DelegateForTime(Label label);
 
-        public TimeManagement _timeManagement;
-        Thread _timeThread;
-        DelegateForTime _delegateTime;
+        private readonly BackgroundWorker _worker = new BackgroundWorker();
 
-        private DateTime _startDateTime, _endDateTime;
+        private DelegateForTime _delegateTime;
+
+        private DateTime _endDateTime;
         private int _indexSelectProject;
+        private DateTime _startDateTime;
+        public TimeManagement TimeManagement;
+        private Thread _timeThread;
 
         public MainWindow()
         {
@@ -30,19 +37,46 @@ namespace TManagement
 
             using (var textReader = new StreamReader("tm.xml"))
             {
-                var deserializer = new XmlSerializer(typeof(TimeManagement));
-                _timeManagement = (TimeManagement)deserializer.Deserialize(textReader);
+                var deserializer = new XmlSerializer(typeof (TimeManagement));
+                TimeManagement = (TimeManagement) deserializer.Deserialize(textReader);
             }
 
-            var bindProjectsListBox = new Binding()
+            var bindProjectsListBox = new Binding
             {
-                Source = _timeManagement,
+                Source = TimeManagement,
                 Path = new PropertyPath("Projects"),
                 Mode = BindingMode.TwoWay
             };
 
-            ProjectListBox.SetBinding(ListBox.ItemsSourceProperty, bindProjectsListBox);
+            ProjectListBox.SetBinding(ItemsControl.ItemsSourceProperty, bindProjectsListBox);
+
+            _worker.DoWork += worker_DoWork;
+            _worker.RunWorkerAsync();
         }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                Thread.Sleep(10000);
+                GetTextActiveWindow();
+            }
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
+        private void GetTextActiveWindow()
+        {
+            var name = new StringBuilder {Length = 266};
+            GetWindowText(GetForegroundWindow(), name, 256);
+
+            Trace.WriteLine(name.ToString());
+        }
+
         private void AddNewProject_Click(object sender, RoutedEventArgs e)
         {
             var form = new ProjectName("");
@@ -51,68 +85,71 @@ namespace TManagement
             if (String.IsNullOrWhiteSpace(form.ProjectNameTextBox.Text))
                 return;
 
-            Project proj = new Project();
+            var proj = new Project();
             proj.Name = form.ProjectNameTextBox.Text;
             proj.TimeIntervals = new List<TimeInterval>();
 
-            _timeManagement.Projects.Add(proj);
-            UpdateUI();
+            TimeManagement.Projects.Add(proj);
+            UpdateUi();
         }
+
         private void EditProject_Click(object sender, RoutedEventArgs e)
         {
             if (ProjectListBox.SelectedValue != null)
             {
-                var form = new ProjectName(_timeManagement.Projects[ProjectListBox.SelectedIndex].Name);
+                var form = new ProjectName(TimeManagement.Projects[ProjectListBox.SelectedIndex].Name);
                 form.ShowDialog();
-                _timeManagement.Projects[ProjectListBox.SelectedIndex].Name = form.ProjectNameTextBox.Text.ToString();
+                TimeManagement.Projects[ProjectListBox.SelectedIndex].Name = form.ProjectNameTextBox.Text;
             }
-            UpdateUI();    
+            UpdateUi();
         }
+
         private void DeleteProject_Click(object sender, RoutedEventArgs e)
         {
-            _timeManagement.Projects.RemoveAt(ProjectListBox.SelectedIndex);
-            UpdateUI();
+            TimeManagement.Projects.RemoveAt(ProjectListBox.SelectedIndex);
+            UpdateUi();
         }
-        public void UpdateUI()
+
+        public void UpdateUi()
         {
             ProjectListBox.Items.Refresh();
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var bc = new BrushConverter();
             if (StartButton.Content.ToString() == "Старт")
             {
                 _startDateTime = DateTime.Now;
-                _delegateTime = new DelegateForTime(CalculateTime);
+                _delegateTime = CalculateTime;
 
                 _timeThread = new Thread(SetLabelTime)
                 {
                     IsBackground = true,
                     Priority = ThreadPriority.Lowest
-                
                 };
                 _timeThread.Start();
 
                 StartButton.Content = "Стоп";
-                StartButton.Background = (Brush)bc.ConvertFrom("#FFF97171");
+                StartButton.Background = (Brush) bc.ConvertFrom("#FFF97171");
 
                 ProjectListBox.IsEnabled = false;
-                TaskbarItemInfo.Overlay = (ImageSource)Resources["OverlayImage"];
-            } 
+                TaskbarItemInfo.Overlay = (ImageSource) Resources["OverlayImage"];
+            }
             else
             {
                 _endDateTime = DateTime.Now;
                 _timeThread.Abort();
                 StartButton.Content = "Старт";
-                StartButton.Background =  (Brush)bc.ConvertFrom("#FF63B85F");
+                StartButton.Background = (Brush) bc.ConvertFrom("#FF63B85F");
 
-                TimeLabel.Content = "0 ч. 0 м."; 
+                TimeLabel.Content = "0 ч. 0 м.";
 
-                TimeInterval ti = new TimeInterval();
+                var ti = new TimeInterval();
                 ti.StartDate = _startDateTime.ToString();
                 ti.EndDate = _endDateTime.ToString();
 
-                _timeManagement.Projects[_indexSelectProject].TimeIntervals.Add(ti);
+                TimeManagement.Projects[_indexSelectProject].TimeIntervals.Add(ti);
 
                 RebuildTimeInfo();
 
@@ -120,16 +157,18 @@ namespace TManagement
                 TaskbarItemInfo.Overlay = null;
             }
         }
-        void CalculateTime(Label label)
+
+        private void CalculateTime(Label label)
         {
             _endDateTime = DateTime.Now;
 
-            long elapsedTicks = _endDateTime.Ticks - _startDateTime.Ticks;
+            var elapsedTicks = _endDateTime.Ticks - _startDateTime.Ticks;
             var elapsedSpan = new TimeSpan(elapsedTicks);
 
             label.Content = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м.";
-        }  
-        void SetLabelTime()
+        }
+
+        private void SetLabelTime()
         {
             while (true)
             {
@@ -137,14 +176,16 @@ namespace TManagement
                 Dispatcher.Invoke(_delegateTime, TimeLabel);
             }
         }
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             using (var writer = XmlWriter.Create("tm.xml"))
             {
-                var serializer = new XmlSerializer(typeof(TimeManagement));
-                serializer.Serialize(writer, _timeManagement);
+                var serializer = new XmlSerializer(typeof (TimeManagement));
+                serializer.Serialize(writer, TimeManagement);
             }
         }
+
         private void ProjectListBox_Selected(object sender, RoutedEventArgs e)
         {
             _indexSelectProject = ProjectListBox.SelectedIndex;
@@ -152,6 +193,7 @@ namespace TManagement
 
             RebuildTimeInfo();
         }
+
         private void RebuildTimeInfo()
         {
             if (_indexSelectProject < 0)
@@ -161,30 +203,33 @@ namespace TManagement
                 return;
             }
 
-            DateTime _endDT = DateTime.Now;
-            DateTime _startDT = DateTime.Now;
+            DateTime endDt = DateTime.Now;
+            DateTime startDt = DateTime.Now;
 
             long allDateTime = 0;
-            foreach (var item in _timeManagement.Projects[_indexSelectProject].TimeIntervals)
+            foreach (TimeInterval item in TimeManagement.Projects[_indexSelectProject].TimeIntervals)
             {
-                _endDT = DateTime.Parse(item.EndDate);
-                _startDT = DateTime.Parse(item.StartDate);
-                allDateTime += (_endDT.Ticks - _startDT.Ticks);
+                endDt = DateTime.Parse(item.EndDate);
+                startDt = DateTime.Parse(item.StartDate);
+                allDateTime += (endDt.Ticks - startDt.Ticks);
             }
 
-            long elapsedTicks = _endDT.Ticks - _startDT.Ticks;
-            TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
-            TimeSpan elapsedSpanAll = new TimeSpan(allDateTime);
+            long elapsedTicks = endDt.Ticks - startDt.Ticks;
+            var elapsedSpan = new TimeSpan(elapsedTicks);
+            var elapsedSpanAll = new TimeSpan(allDateTime);
 
-            LastSessionLabel.Content = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м. " + elapsedSpan.Seconds + " с. ";
-            AllTimeLabel.Content = elapsedSpanAll.Hours + " ч. " + elapsedSpanAll.Minutes + " м. " + elapsedSpanAll.Seconds + " с. ";
+            LastSessionLabel.Content = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м. " + elapsedSpan.Seconds +
+                                       " с. ";
+            AllTimeLabel.Content = elapsedSpanAll.Hours + " ч. " + elapsedSpanAll.Minutes + " м. " +
+                                   elapsedSpanAll.Seconds + " с. ";
         }
+
         private void ProjectListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ProjectListBox.SelectedIndex >= 0)
             {
-                (new AboutProject(_timeManagement.Projects[ProjectListBox.SelectedIndex].TimeIntervals)).ShowDialog();
-            }  
+                (new AboutProject(TimeManagement.Projects[ProjectListBox.SelectedIndex].TimeIntervals)).ShowDialog();
+            }
         }
     }
 }

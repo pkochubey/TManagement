@@ -38,7 +38,6 @@ C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement
 C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.pdb
 C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\bin\Debug\TManagement.exe
 C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\bin\Debug\TManagement.pdb
-C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.csprojResolveAssemblyReference.cache
 C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\MainWindow.baml
 C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\ProjectName.baml
 C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\AboutProject.g.cs
