@@ -70,3 +70,4 @@ C:\Users\МИС\Documents\TManagement\TManagement\obj\Debug\TManagement.Properti
 C:\Users\МИС\Documents\TManagement\TManagement\obj\Debug\TManagement.csproj.GenerateResource.Cache
 C:\Users\МИС\Documents\TManagement\TManagement\obj\Debug\TManagement.exe
 C:\Users\МИС\Documents\TManagement\TManagement\obj\Debug\TManagement.pdb
+C:\Users\Kochubei\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.csprojResolveAssemblyReference.cache

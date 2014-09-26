@@ -7,7 +7,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -179,6 +181,19 @@ namespace TManagement
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (!ProjectListBox.IsEnabled)
+            {
+                if (MessageBox.Show(this, "Закрыть программу? \nВремя не остановлено!", "Внимание!",
+                        MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    StartButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+
             using (var writer = XmlWriter.Create("tm.xml"))
             {
                 var serializer = new XmlSerializer(typeof (TimeManagement));
