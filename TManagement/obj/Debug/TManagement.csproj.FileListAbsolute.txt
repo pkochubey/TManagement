@@ -89,3 +89,4 @@ C:\Users\Pavel\Documents\GitHub\TManagement\TManagement\obj\Debug\AboutProject.b
 C:\Users\Pavel\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.g.resources
 C:\Users\Pavel\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.Properties.Resources.resources
 C:\Users\Pavel\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.csproj.GenerateResource.Cache
+C:\Users\Pavel\Documents\GitHub\TManagement\TManagement\obj\Debug\TManagement.csprojResolveAssemblyReference.cache

@@ -235,7 +235,12 @@ namespace TManagement
 
             LastSessionLabel.Content = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м. " + elapsedSpan.Seconds +
                                        " с. ";
-            AllTimeLabel.Content = elapsedSpanAll.Hours + " ч. " + elapsedSpanAll.Minutes + " м. " +
+            int hours = elapsedSpanAll.Hours;
+            if (elapsedSpanAll.Days > 0)
+            {
+                hours = hours + elapsedSpanAll.Days * 24;
+            }
+            AllTimeLabel.Content = hours + " ч. " + elapsedSpanAll.Minutes + " м. " +
                                    elapsedSpanAll.Seconds + " с. ";
         }
 
