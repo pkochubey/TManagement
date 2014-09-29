@@ -32,5 +32,8 @@ namespace TManagement.Models
 
         [XmlAttribute("end")]
         public string EndDate { get; set; }
+
+        [XmlAttribute("buy")]
+        public int Buy { get; set; }
     }
 }

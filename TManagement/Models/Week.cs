@@ -1,4 +1,7 @@
-﻿namespace TManagement.Models
+﻿using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+
+namespace TManagement.Models
 {
     internal class Week
     {
@@ -9,5 +12,8 @@
         public string Day { get; set; }
 
         public long Tick { get; set; }
+
+        public int Buy { get; set; }
+        public Image ImageBuy { get; set; }
     }
 }

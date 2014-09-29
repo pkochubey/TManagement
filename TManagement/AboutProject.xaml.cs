@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using TManagement.Models;
 
 namespace TManagement
@@ -29,12 +33,17 @@ namespace TManagement
 
                 string hours = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м. " + elapsedSpan.Seconds + " c. ";
 
+                Image myImage = new Image();
+                myImage.Source = new BitmapImage(new Uri("Images/ruble.png", UriKind.Relative));
+
                 items.Add(new Week
                 {
                     Number = numberWeek,
                     Hours = hours,
                     Day = endDateTime.ToString("MM/dd/yyyy"),
-                    Tick = elapsedTicks
+                    Tick = elapsedTicks,
+                    Buy = ti.Buy,
+                    ImageBuy = myImage
                 });
             }
 
@@ -58,6 +67,14 @@ namespace TManagement
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            foreach (Week item in ListViewTime.SelectedItems)
+            {
+                item.Buy = 1;
+            }
         }
     }
 }
