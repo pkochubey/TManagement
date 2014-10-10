@@ -21,21 +21,33 @@ namespace TManagement
 {
     public partial class MainWindow
     {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
         public delegate void DelegateForTime(Label label);
-
         private readonly BackgroundWorker _worker = new BackgroundWorker();
-
         private DelegateForTime _delegateTime;
 
         private DateTime _endDateTime;
         private int _indexSelectProject;
-        private DateTime _startDateTime;
+        private DateTime? _startDateTime;
         public TimeManagement TimeManagement;
         private Thread _timeThread;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Thread.Sleep(5000);
+            Process[] procs = Process.GetProcesses();
+            var s = new List<string>();
+            foreach (Process p in procs)
+            {
+                if (!String.IsNullOrWhiteSpace(p.MainWindowTitle))
+                    s.Add(p.MainWindowTitle);
+            }
 
             using (var textReader = new StreamReader("tm.xml"))
             {
@@ -56,27 +68,32 @@ namespace TManagement
             _worker.RunWorkerAsync();
         }
 
+        private void GetTextActiveWindow()
+        {
+            var name = new StringBuilder { Length = 266 };
+            GetWindowText(GetForegroundWindow(), name, 256);
+
+            if (!name.ToString().Contains("Studio"))
+            {
+                try
+                {
+                    _startDateTime = _startDateTime.Value.AddMinutes(2.5);
+                }
+                catch (Exception)
+                {
+                    // not start project
+                }
+                
+            }
+        }
+        
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(1000 * 60 * 5); 
                 GetTextActiveWindow();
             }
-        }
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
-        private void GetTextActiveWindow()
-        {
-            var name = new StringBuilder {Length = 266};
-            GetWindowText(GetForegroundWindow(), name, 256);
-
-            Trace.WriteLine(name.ToString());
         }
 
         private void AddNewProject_Click(object sender, RoutedEventArgs e)
@@ -157,6 +174,7 @@ namespace TManagement
 
                 ProjectListBox.IsEnabled = true;
                 TaskbarItemInfo.Overlay = null;
+                _startDateTime = null;
             }
         }
 
@@ -164,7 +182,7 @@ namespace TManagement
         {
             _endDateTime = DateTime.Now;
 
-            var elapsedTicks = _endDateTime.Ticks - _startDateTime.Ticks;
+            var elapsedTicks = _endDateTime.Ticks - _startDateTime.Value.Ticks;
             var elapsedSpan = new TimeSpan(elapsedTicks);
 
             label.Content = elapsedSpan.Hours + " ч. " + elapsedSpan.Minutes + " м.";

@@ -65,7 +65,6 @@
       <DependentUpon>ProjectName.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\TimeManagement.cs" />
-    <Compile Include="typeOfAncestor.cs" />
     <Page Include="AboutProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
