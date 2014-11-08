@@ -73,7 +73,25 @@ namespace TManagement
             var name = new StringBuilder { Length = 266 };
             GetWindowText(GetForegroundWindow(), name, 256);
 
-            if (!name.ToString().Contains("Studio"))
+            bool isWorkProgram = false;
+
+            var WhiteList = new List<string>
+            {
+                "Studio", "Blend", "Xamarin", "Skype",
+                "Word", "Excel", "Delphi", "Outlook",
+                "Overflow"
+            };
+
+            foreach (var list in WhiteList)
+            {
+                if (name.ToString().ToUpper().Contains(list.ToUpper()))
+                {
+                    isWorkProgram = true;
+                    break;
+                }
+            }
+
+            if (!isWorkProgram)
             {
                 try
                 {
